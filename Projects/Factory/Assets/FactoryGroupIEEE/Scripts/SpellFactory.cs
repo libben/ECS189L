@@ -16,8 +16,7 @@ public class SpellFactory : MonoBehaviour
                 boomerang.transform.position = this.transform.position;
                 break;
             case Spells.Spray:
-				var spray = this.GetComponent<SprayMaker>().Make();
-				spray.transform.position = this.transform.position;
+				this.GetComponent<SprayMaker>().Make();
                 break;
             case Spells.Heal:
                 break;
