@@ -5,6 +5,7 @@ using UnityEngine;
 namespace IEEE {
 public enum Spells { Boomerang, Spray, Heal }
 [RequireComponent(typeof(BoomerangMaker))]
+[RequireComponent(typeof(SprayMaker))]
 public class SpellFactory : MonoBehaviour
 {
     private void BuildSpell(Spells spell)
@@ -15,6 +16,8 @@ public class SpellFactory : MonoBehaviour
                 boomerang.transform.position = this.transform.position;
                 break;
             case Spells.Spray:
+				var spray = this.GetComponent<SprayMaker>().Make();
+				spray.transform.position = this.transform.position;
                 break;
             case Spells.Heal:
                 break;
