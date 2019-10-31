@@ -10,7 +10,7 @@ public class SprayMotion : MonoBehaviour
 
 	void Start()
 	{
-		YSpeed = Random.Range(-3.0f, 3.0f);
+		YSpeed = Random.Range(-1.0f, 1.0f) * XSpeed;
 	}
 
 	void Update()

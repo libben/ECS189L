@@ -10,7 +10,7 @@ namespace IEEE
 		[SerializeField]
 		private GameObject prefab;
 		[SerializeField]
-		private int number = 5;
+		private int number = 12;
 
 		void Start()
 		{
