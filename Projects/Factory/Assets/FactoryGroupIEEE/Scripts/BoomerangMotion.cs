@@ -26,11 +26,6 @@ public class BoomerangMotion : MonoBehaviour
         gameObject.transform.RotateAround(centerOfPrefab, YAxis, RotationSpeedInAngles*Time.deltaTime);
         
         this.TimeElapsedInJourney += Time.deltaTime;
-        /*if (this.TimeElapsedInJourney >= this.JourneyDuration) {
-            print(this.TimeElapsedInJourney);
-            print(this.JourneyDuration);
-            Destroy(this.gameObject);
-        }*/
         this.TimeElapsedInJourney = this.TimeElapsedInJourney % JourneyDuration;
         var percentJourneyDone = this.TimeElapsedInJourney/JourneyDuration;
         var radiansOfJourney = percentJourneyDone*2*Mathf.PI;
@@ -39,9 +34,6 @@ public class BoomerangMotion : MonoBehaviour
         var currentPosition = startingPosition;
         currentPosition.x += forwardDistance;
         currentPosition.z += sidewaysDisplacement;
-        if (float.IsNaN(sidewaysDisplacement)) {
-            print($"jduration: {JourneyDuration}, timeElpsd: {TimeElapsedInJourney}, %JrnyDn: {percentJourneyDone}, Radns: {radiansOfJourney}");
-        }
         gameObject.transform.position = currentPosition;
     }
 }
