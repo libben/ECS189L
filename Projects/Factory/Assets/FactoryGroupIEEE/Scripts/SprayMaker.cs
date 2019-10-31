@@ -18,7 +18,7 @@ namespace IEEE
 		void Start()
 		{
 			if (ProjectileCount == 1)
-				VelocityStep = 0.0f;
+				VelocityStep = 1.0f;
 			else
 				VelocityStep = 2.0f / (ProjectileCount - 1);
 		}
