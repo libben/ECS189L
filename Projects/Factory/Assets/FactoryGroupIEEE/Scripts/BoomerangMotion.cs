@@ -5,28 +5,44 @@ using UnityEngine;
 namespace IEEE {
 public class BoomerangMotion : MonoBehaviour
 {
-    private const float MaxForwardDistance = 30f;
-    private const float MaxSidewaysDisplacement = 10f;
-    private const float JourneyDuration = 4f;
-    private float TimeElapsedInJourney = 0f;
+    [SerializeField] private float MaxForwardDistance = 15f;
+    [SerializeField] private float MaxSidewaysDisplacement = 5f;
+    [SerializeField] private float JourneyDuration = 5;
+    private float TimeElapsedInJourney;
     private static Vector3 YAxis = new Vector3(0, 1, 0);
-    float rotationSpeedInRadians = 2*Mathf.PI;
-    [SerializeField] private float RotationSpeed;
+    [SerializeField] private float RotationSpeedInAngles = 360;
     // Update is called once per frame
+    private Vector3 startingPosition;
+
+    void Start()
+    {
+        Destroy(this.gameObject, JourneyDuration);
+        startingPosition = gameObject.transform.position;
+        this.TimeElapsedInJourney = 0f;
+    }
     void Update()
     {
         var centerOfPrefab = gameObject.transform.position;
-        gameObject.transform.RotateAround(centerOfPrefab, YAxis, rotationSpeedInRadians*Time.deltaTime);
+        gameObject.transform.RotateAround(centerOfPrefab, YAxis, RotationSpeedInAngles*Time.deltaTime);
         
         this.TimeElapsedInJourney += Time.deltaTime;
+        /*if (this.TimeElapsedInJourney >= this.JourneyDuration) {
+            print(this.TimeElapsedInJourney);
+            print(this.JourneyDuration);
+            Destroy(this.gameObject);
+        }*/
         this.TimeElapsedInJourney = this.TimeElapsedInJourney % JourneyDuration;
         var percentJourneyDone = this.TimeElapsedInJourney/JourneyDuration;
         var radiansOfJourney = percentJourneyDone*2*Mathf.PI;
-        var forwardDistance = Mathf.Sin(radiansOfJourney)*MaxForwardDistance/2 + MaxForwardDistance/2;
+        var forwardDistance = -1*Mathf.Cos(radiansOfJourney)*MaxForwardDistance/2 + MaxForwardDistance/2;
         var sidewaysDisplacement = Mathf.Sin(radiansOfJourney)*MaxSidewaysDisplacement;
-        centerOfPrefab.x = forwardDistance*this.transform.forward.x;
-        centerOfPrefab.z = sidewaysDisplacement*this.transform.forward.z;
-        gameObject.transform.position = centerOfPrefab;
+        var currentPosition = startingPosition;
+        currentPosition.x += forwardDistance;
+        currentPosition.z += sidewaysDisplacement;
+        if (float.IsNaN(sidewaysDisplacement)) {
+            print($"jduration: {JourneyDuration}, timeElpsd: {TimeElapsedInJourney}, %JrnyDn: {percentJourneyDone}, Radns: {radiansOfJourney}");
+        }
+        gameObject.transform.position = currentPosition;
     }
 }
 }
