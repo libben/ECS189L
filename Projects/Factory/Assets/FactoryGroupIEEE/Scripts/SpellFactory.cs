@@ -29,7 +29,7 @@ public class SpellFactory : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha1)) {
             BuildSpell(Spells.Boomerang);
         }
-        if (Input.GetKey(KeyCode.Alpha2)) {
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
             BuildSpell(Spells.Spray);
         }
         if (Input.GetKey(KeyCode.Alpha3)) {

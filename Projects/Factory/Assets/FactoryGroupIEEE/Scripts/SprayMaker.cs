@@ -10,20 +10,36 @@ namespace IEEE
 		[SerializeField]
 		private GameObject prefab;
 		[SerializeField]
-		private int number = 12;
+		private int ProjectileCount = 12;
+		private float VelocityStep;
 
 		void Start()
 		{
+			if (ProjectileCount == 1)
+				VelocityStep = 0.0f;
+			else
+				VelocityStep = 2.0f / (ProjectileCount - 1);
+			//Debug.Log(VelocityStep.ToString());
 		}
 
 		public GameObject Make()
 		{
 			GameObject newObject;
-			for (int i = 0; i < number - 1; i++)
+
+			/*
+			newObject = Instantiate(this.prefab, this.gameObject.transform);
+			var firstObjectMotion = newObject.GetComponent<SprayMotion>();
+			firstObjectMotion.SetZSpeed(VelocityStep, 0);
+			Destroy(newObject, 5.0f);
+			*/
+			for (int i = 0; i < ProjectileCount; i++)
 			{
 				newObject = Instantiate(this.prefab, this.gameObject.transform);
+				var objectMotion = newObject.GetComponent<SprayMotion>();
+				objectMotion.SetZSpeed(VelocityStep, i);
+				Destroy(newObject, 5.0f);
 			}
-			newObject = Instantiate(this.prefab, this.gameObject.transform);
+			newObject = GameObject.Find("SprayBullet");
 			return newObject;
 		}
 	}
