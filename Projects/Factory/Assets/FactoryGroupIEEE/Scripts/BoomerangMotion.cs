@@ -19,13 +19,13 @@ public class BoomerangMotion : MonoBehaviour
         gameObject.transform.RotateAround(centerOfPrefab, YAxis, rotationSpeedInRadians*Time.deltaTime);
         
         this.TimeElapsedInJourney += Time.deltaTime;
-        this.TimeElapsedInJourney = this.TimeElapsedInJourney % this.JourneyDuration;
-        var percentJourneyDone = this.TimeElapsedInJourney/this.JourneyDuration;
+        this.TimeElapsedInJourney = this.TimeElapsedInJourney % JourneyDuration;
+        var percentJourneyDone = this.TimeElapsedInJourney/JourneyDuration;
         var radiansOfJourney = percentJourneyDone*2*Mathf.PI;
         var forwardDistance = Mathf.Sin(radiansOfJourney)*MaxForwardDistance/2 + MaxForwardDistance/2;
         var sidewaysDisplacement = Mathf.Sin(radiansOfJourney)*MaxSidewaysDisplacement;
-        centerOfPrefab.x = forwardDistance*this.transform.forward;
-        centerOfPrefab.z = sidewaysDisplacement;
+        centerOfPrefab.x = forwardDistance*this.transform.forward.x;
+        centerOfPrefab.z = sidewaysDisplacement*this.transform.forward.z;
         gameObject.transform.position = centerOfPrefab;
     }
 }

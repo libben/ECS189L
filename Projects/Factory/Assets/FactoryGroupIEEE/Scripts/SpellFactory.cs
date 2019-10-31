@@ -26,13 +26,13 @@ public class SpellFactory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("1")) {
+        if (Input.GetKey(KeyCode.Alpha1)) {
             BuildSpell(Spells.Boomerang);
         }
-        if (Input.GetButton("2")) {
+        if (Input.GetKey(KeyCode.Alpha2)) {
             BuildSpell(Spells.Spray);
         }
-        if (Input.GetButton("3")) {
+        if (Input.GetKey(KeyCode.Alpha3)) {
             BuildSpell(Spells.Heal);
         }
     }
