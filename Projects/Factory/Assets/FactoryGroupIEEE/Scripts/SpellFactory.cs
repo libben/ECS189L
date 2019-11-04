@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace IEEE {
-public enum Spells { Boomerang, Spray, Heal }
+public enum Spells { Boomerang, Spray, Orb }
 [RequireComponent(typeof(BoomerangMaker))]
 [RequireComponent(typeof(SprayMaker))]
+[RequireComponent(typeof(OrbMaker))]
 public class SpellFactory : MonoBehaviour
 {
     private void BuildSpell(Spells spell)
@@ -18,7 +19,8 @@ public class SpellFactory : MonoBehaviour
             case Spells.Spray:
 				this.GetComponent<SprayMaker>().Make();
                 break;
-            case Spells.Heal:
+            case Spells.Orb:
+                this.GetComponent<OrbMaker>().Make();
                 break;
         }
     }
@@ -32,7 +34,7 @@ public class SpellFactory : MonoBehaviour
             BuildSpell(Spells.Spray);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            BuildSpell(Spells.Heal);
+            BuildSpell(Spells.Orb);
         }
     }
 }
